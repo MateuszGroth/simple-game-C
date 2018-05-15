@@ -1,0 +1,621 @@
+/***************************************************************
+ * Name:      projektMain.cpp
+ * Purpose:   Code for Application Frame
+ * Author:    Mateusz (jhfxdghj)
+ * Created:   2016-01-10
+ * Copyright: Mateusz (hsxdfgs)
+ * License:
+ **************************************************************/
+
+#include "wx_pch.h"
+#include "projektMain.h"
+#include <wx/msgdlg.h>
+
+#include <graphics.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define PIXELS 20
+#define PIXELOS 8
+#define PIXEL 6
+#define P 3
+#define PO 10
+#define PO1 7
+#define PO2 9
+#define ESC 27
+#define N 5000
+#include <iostream>
+
+char imie[64]={0};
+
+void obiekt(int x, int y,int faza, int kolor1, int kolor2){
+    int o;
+    int obiekt[3][PIXEL*2]={
+    {60,60, 80,60, 80,80, 60,80, 60,60, 80,60},
+    {55,55, 85,55, 85,85, 55,85, 55,55, 85,55},
+    {50,50, 90,50, 90,90, 50,90, 50,50, 90,50}
+    };
+    for(o=0; o<PIXEL; o++){
+        obiekt[faza][o*2]=obiekt[faza][o*2]+x;
+        obiekt[faza][o*2+1]=obiekt[faza][o*2+1]+y;
+    }
+    setcolor(kolor1);
+    setfillstyle(SOLID_FILL,kolor2);
+    fillpoly(PIXEL,obiekt[faza]);
+
+}
+void odliczanie(void){
+setcolor(WHITE);
+settextjustify(CENTER_TEXT, getmaxheight()/4);
+    delay(150);
+    settextstyle(4,HORIZ_DIR,15);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4,"3");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,16);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-5,"3");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,17);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-10,"3");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,18);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-15,"3");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,19);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-22,"3");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,20);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"3");
+    delay(100);
+    setcolor(BLACK);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"3");
+    setcolor(WHITE);
+    delay(100);
+    settextstyle(4,HORIZ_DIR,15);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4,"2");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,16);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-5,"2");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,17);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-10,"2");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,18);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-15,"2");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,19);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-22,"2");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,20);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"2");
+    delay(100);
+    setcolor(BLACK);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"2");
+    setcolor(WHITE);
+    delay(100);
+    settextstyle(4,HORIZ_DIR,15);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4,"1");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,16);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-5,"1");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,17);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-10,"1");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,18);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-15,"1");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,19);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-22,"1");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,20);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"1");
+    delay(100);
+    setcolor(BLACK);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"1");
+    setcolor(WHITE);
+    delay(100);
+    settextstyle(4,HORIZ_DIR,15);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4,"GO!");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,16);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-5,"GO!");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,17);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-10,"GO!");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,18);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-15,"GO!");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,19);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-22,"GO!");
+    delay(100);
+    settextstyle(4,HORIZ_DIR,20);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"GO!");
+    delay(100);
+    setcolor(BLACK);
+    outtextxy(getmaxwidth()/4,getmaxheight()/4-30,"GO!");
+    setcolor(WHITE);
+    settextstyle(0,HORIZ_DIR,15);
+}
+void strzalki(int color){
+
+    int strzalka1[PIXELOS*2]={400,160 , 390,160, 410,140 , 430,160 , 420,160 , 420,180 , 400,180 , 400,160 };
+    int strzalka2[PIXELOS*2]={400,250 , 390,250, 410,270 , 430,250 , 420,250 , 420,230 , 400,230 , 400,250 };
+    int strzalka3[PIXELOS*2]={338,205 , 358,185, 358,195 , 378,195 , 378,215 , 358,215 , 358,225 , 338,205 };
+    int strzalka4[PIXELOS*2]={480,205 , 460,185, 460,195 , 440,195 , 440,215 , 460,215 , 460,225 , 480,205 };
+
+    setcolor(color);
+    fillpoly(PIXELOS,strzalka1);
+    fillpoly(PIXELOS,strzalka2);
+    fillpoly(PIXELOS,strzalka3);
+    fillpoly(PIXELOS,strzalka4);
+    }
+int mysz(int x, int y){
+
+    if(x>=(getmaxwidth()/4)-80  && y>=(getmaxheight()/4)-30 && x<=(getmaxwidth()/4)+80 && y<=(getmaxheight()/4)+30 ){
+        return 1;
+        }
+    if(x>=(getmaxwidth()/4)-80  && y>=(getmaxheight()/4)+100 && x<=(getmaxwidth()/4)+80 && y<=(getmaxheight()/4)+160 ){
+        return 27;
+        }
+    if(x>=(getmaxwidth()/4)-80  && y>=(getmaxheight()/4)-160 && x<=(getmaxwidth()/4)+80 && y<=(getmaxheight()/4)-100 ){
+        return 2;
+        }
+
+
+}
+void start(){
+
+    int x,y;
+    int xsr,ysr;
+    x=getmaxwidth()/2;
+    y=getmaxheight()/2;
+    xsr=x/2;
+    ysr=y/2;
+    setcolor(RED);
+    setfillstyle(SOLID_FILL,RED);
+    rectangle(xsr-80,ysr-30,xsr+80,ysr+30);
+    rectangle(xsr-85,ysr-35,xsr+85,ysr+35);
+    floodfill(xsr-83,ysr,RED);
+    rectangle(xsr-85,ysr+95,xsr+85,ysr+165);
+    rectangle(xsr-80,ysr+100,xsr+80,ysr+160);
+    floodfill(xsr-82,ysr+97,RED);
+    rectangle(xsr-80,ysr-100,xsr+80,ysr-160);
+    rectangle(xsr-85,ysr-95,xsr+85,ysr-165);
+    floodfill(xsr-82,ysr-97,RED);
+    settextjustify(CENTER_TEXT, ysr);
+    settextstyle(0,HORIZ_DIR,15);
+    outtextxy(xsr,ysr-15,"START");
+    outtextxy(xsr,ysr+118,"EXIT");
+    outtextxy(xsr,ysr-145,"HELP");
+}
+
+int key(void){
+    int z;
+    if(kbhit()){
+    z=getch();
+    switch(z){
+case 0:
+case 224:
+    z=getch();
+    }
+    }
+
+    return z;
+}
+void rysuj(int x, int y, int faza, int color1, int color2){
+    int p;
+    int ludzik[3][PIXELS*2]={
+    {50,50, 70,50, 70,70, 80,70, 108,90, 102,98, 80,82, 80,112, 100,140, 95,140, 60,112, 28,140, 18,140, 40,112, 40,82, 18,98, 10,90, 40,70, 50,70, 50,50},
+    {50,50, 70,50, 70,70, 80,70, 108,90, 102,98, 80,82, 80,112, 90,140, 83,140, 60,112, 38,140, 25,140, 40,112, 40,82, 18,98, 10,90, 40,70, 50,70, 50,50},
+    {50,50, 70,50, 70,70, 80,70, 108,90, 102,98, 80,82, 80,112, 80,140, 75,140, 60,112, 45,140, 35,140, 40,112, 40,82, 18,98, 10,90, 40,70, 50,70, 50,50}
+    };
+    for(p=0; p<PIXELS; p++){
+        ludzik[faza][p*2]=ludzik[faza][p*2]+x;
+        ludzik[faza][p*2+1]=ludzik[faza][p*2+1]+y;
+    }
+    setcolor(color1);
+    setfillstyle(SOLID_FILL,color2);
+    fillpoly(PIXELS,ludzik[faza]);
+
+    }
+
+
+int mojagra() {
+srand(time(NULL));
+    char napis[30]={0};
+    unsigned char kod;
+    int maxX, maxY;
+    int x,y,xp,yp;
+    int sleep;
+    int r,rp,rf,dr;
+    int i,o ;
+    int a, od;
+    char u;
+    int licznik;
+    int licznik2;
+    int xo,yo, licz;
+    int xop, yop;
+    int xop1, yop1;
+    int xop2, yop2;
+    int ro,rop,rof,dor;
+    int ro1,rop1,rof1,dor1;
+    int xo1,yo1;
+    int ro2,rop2,rof2,dor2;
+    int xo2,yo2;
+    int ob1;
+    int licz1;
+    int ob2;
+    int licz2;
+    int licznik3;
+    int wynik;
+    initwindow(getmaxwidth()/2, getmaxheight()/2);
+    maxX=getmaxx();
+    maxY=getmaxy();
+    licz1=0;
+    wynik=0;
+    licz2=0;
+    licznik2=0;
+    licznik3=0;
+    ob2=0;
+    ob1=0;
+    xo=20;
+    yo=-50;
+    xo1=70;
+    yo1=-50;
+    xo2=100;
+    yo2=-50;
+    licznik=0;
+    y=260;
+    x=0;
+    r=0;
+    ro=0;
+    rof=0;
+    ro1=0;
+    rof1=0;
+    ro2=0;
+    rof2=0;
+    rf=0;
+    sleep=10;
+    od=0;
+    licz=0;
+int errorcode;
+errorcode = graphresult();
+if (errorcode != grOk) {
+ printf("Blad BGI: %s\n", grapherrormsg(errorcode));
+ printf("Wcisnij dowolny klawicz, zeby zakonczyc:");
+ getch();
+} else {
+
+
+
+    do{
+cleardevice();
+start();
+do{
+    getmouseclick(WM_LBUTTONDOWN,i,o);
+    a=mysz(i,o);
+}while(a!=1 && a!=27 && a!=2);
+if(a==1){
+    od++;
+}
+
+if(a==27){
+    exit(0);
+}
+if(a==2){
+        od++;
+    cleardevice();
+    setcolor(WHITE);
+settextjustify(CENTER_TEXT, getmaxheight()/4);
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,0);
+    outtextxy(getmaxwidth()/4,20,"Okno Pomocy");
+    outtextxy(100,140,"W - gora");
+    outtextxy(100,180,"S - dol");
+    outtextxy(100,220,"A - lewo");
+    outtextxy(100,260,"D - prawo");
+    outtextxy(100,300,"P - pauza");
+    outtextxy(310,190,"A");
+    outtextxy(510,190,"D");
+    outtextxy(410,105,"W");
+    outtextxy(410,275,"S");
+    strzalki(WHITE);
+    settextstyle(0,HORIZ_DIR,0);
+    outtextxy(400,410,"Nacisnij dowolny przycisk aby rozpoczac gre");
+getch();
+    cleardevice();
+}
+if(od==1){
+        cleardevice();
+    odliczanie();
+}
+setfillstyle(SOLID_FILL,BLUE);
+floodfill(2, 2, WHITE);
+do{
+
+if(licz==1){
+    xo=6*rand()/(RAND_MAX/100+1);
+    licz=0;
+}
+if(licz1==1){
+    xo1=6*rand()/(RAND_MAX/100+1);
+    licz1=0;
+}
+if(licz2==1){
+    xo2=6*rand()/(RAND_MAX/100+1);
+    licz2=0;
+}
+obiekt(xo,yo, ro, WHITE, GREEN);
+if(yo>=(getmaxheight()/4 -70) && licznik>=2){
+   ob1++;
+   }
+if(yo1>=(getmaxheight()/4 - 170) && licznik2>=2){
+   ob2++;
+   }
+if(licznik>=2 && ob1!=0){
+    obiekt(xo1,yo1, ro1, BLACK, WHITE);
+
+}
+if(licznik2>=2 && ob2!=0){
+    obiekt(xo2,yo2, ro2, WHITE, RED);
+
+}
+rysuj(x,y,r,WHITE, RED);
+xop=xo;
+yop=yo;
+xop1=xo1;
+yop1=yo1;
+xop2=xo2;
+yop2=yo2;
+rop=ro;
+rop1=ro1;
+rop2=ro2;
+xp=x;
+yp=y;
+rp=r;
+delay(sleep);
+kod=key();
+switch(kod){
+case 'd':
+ if(x<maxX-130) x=x+10;
+ rysuj(xp,yp,rp,BLUE, BLUE);
+ rf++;
+ break;
+case 'a':
+ if(x>=10)x=x-10;
+ rysuj(xp,yp,rp,BLUE, BLUE);
+ rf++;
+ break;
+case 's':
+ if(y<maxY-150) y=y+10;
+ rysuj(xp,yp,rp,BLUE, BLUE);
+ rf++;
+ break;
+case 'w':
+ if(y>=250)y=y-10;
+ rysuj(xp,yp,rp,BLUE, BLUE);
+ rf++;
+ break;
+}
+if(rof>PO){
+rof=0;
+if(ro>=2)
+  dor=-1;
+if(ro<=0)
+  dor=+1;
+ro=ro+dor;
+}
+if(rof1>PO1){
+rof1=0;
+if(ro1>=2)
+  dor1=-1;
+if(ro1<=0)
+  dor1=+1;
+ro1=ro1+dor1;
+}
+if(rof2>PO2){
+rof2=0;
+if(ro2>=2)
+  dor2=-1;
+if(ro2<=0)
+  dor2=+1;
+ro2=ro2+dor2;
+}
+if(rf>P){
+rf=0;
+if(r>=2)
+  dr=-1;
+if(r<=0)
+  dr=+1;
+r=r+dr;
+}
+if(licznik3>=2){
+    yo++;
+    yo1++;
+    yo2++;
+}
+if(licznik3>=5){
+    yo++;
+    yo1++;
+    yo2++;
+}
+rof++;
+yo++;
+if(licznik>=2 && ob1!=0){
+yo1++;
+rof1++;
+}
+if(licznik2>=2 && ob2!=0){
+yo2++;
+rof2++;
+}
+obiekt(xo,yop, rop, BLUE, BLUE);
+if(licznik>=2 && ob1!=0){
+    obiekt(xo1,yop1, rop1, BLUE, BLUE);
+
+}
+if(licznik2>=2 && ob2!=0){
+    obiekt(xo2,yop2, rop2, BLUE, BLUE);
+
+}
+if((x-70<=xo2 && (x+50)>=xo2 && (y-40)<=yo2 && (y+60)>=yo2))
+{
+    wynik++;
+}
+if((x-70<=xo1 && (x+50)>=xo1 && (y-40)<=yo1 && (y+60)>=yo1))
+{
+    wynik++;
+}
+if((x-70<=xo && (x+50)>=xo && (y-40)<=yo && (y+60)>=yo))
+{
+    wynik++;
+}
+if((yo2>=(getmaxheight()/2-50)) || (x-70<=xo2 && (x+50)>=xo2 && (y-40)<=yo2 && (y+60)>=yo2)){
+    licz2++;
+    yo2=-50;
+    licznik3++;
+}
+if((yo1>=(getmaxheight()/2-50)) || (x-70<=xo1 && (x+50)>=xo1 && (y-40)<=yo1 && (y+60)>=yo1)){
+    licz1++;
+    yo1=-50;
+    licznik2++;
+}
+if((yo>=(getmaxheight()/2-50)) || (x-70<=xo && (x+50)>=xo && (y-40)<=yo && (y+60)>=yo)){
+    licz++;
+    yo=-50;
+    licznik++;
+
+}
+if(licznik3>=11){
+    kod=ESC;
+}
+
+
+}while(kod!=112 && kod!=ESC);
+    }while(kod!=ESC);
+ }
+ cleardevice();
+ settextstyle(0,HORIZ_DIR,0);
+ setcolor(WHITE);
+ sprintf(napis, "twoj wynik to %d / 40", wynik);
+ outtextxy(getmaxwidth()/4,(getmaxheight()/4)-50,imie);
+ outtextxy(getmaxwidth()/4,getmaxheight()/4,napis);
+
+ getch();
+ closegraph();
+ }
+
+
+
+//(*InternalHeaders(projektFrame)
+#include <wx/intl.h>
+#include <wx/string.h>
+//*)
+
+//helper functions
+enum wxbuildinfoformat {
+    short_f, long_f };
+
+wxString wxbuildinfo(wxbuildinfoformat format)
+{
+    wxString wxbuild(wxVERSION_STRING);
+
+    if (format == long_f )
+    {
+#if defined(__WXMSW__)
+        wxbuild << _T("-Windows");
+#elif defined(__UNIX__)
+        wxbuild << _T("-Linux");
+#endif
+
+#if wxUSE_UNICODE
+        wxbuild << _T("-Unicode build");
+#else
+        wxbuild << _T("-ANSI build");
+#endif // wxUSE_UNICODE
+    }
+
+    return wxbuild;
+}
+
+//(*IdInit(projektFrame)
+const long projektFrame::ID_STATICTEXT1 = wxNewId();
+const long projektFrame::ID_BUTTON1 = wxNewId();
+const long projektFrame::ID_TEXTCTRL1 = wxNewId();
+const long projektFrame::idMenuQuit = wxNewId();
+const long projektFrame::idMenuAbout = wxNewId();
+const long projektFrame::ID_STATUSBAR1 = wxNewId();
+//*)
+
+BEGIN_EVENT_TABLE(projektFrame,wxFrame)
+    //(*EventTable(projektFrame)
+    //*)
+END_EVENT_TABLE()
+
+projektFrame::projektFrame(wxWindow* parent,wxWindowID id)
+{
+    //(*Initialize(projektFrame)
+    wxMenuItem* MenuItem2;
+    wxMenuItem* MenuItem1;
+    wxMenu* Menu1;
+    wxMenuBar* MenuBar1;
+    wxMenu* Menu2;
+
+    Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
+    SetClientSize(wxSize(400,183));
+    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Wpisz nick"), wxPoint(168,32), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+    Button1 = new wxButton(this, ID_BUTTON1, _("Rozpocznij Grę"), wxPoint(152,96), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxPoint(152,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    MenuBar1 = new wxMenuBar();
+    Menu1 = new wxMenu();
+    MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem1);
+    MenuBar1->Append(Menu1, _("&File"));
+    Menu2 = new wxMenu();
+    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
+    Menu2->Append(MenuItem2);
+    MenuBar1->Append(Menu2, _("Help"));
+    SetMenuBar(MenuBar1);
+    StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, 0, _T("ID_STATUSBAR1"));
+    int __wxStatusBarWidths_1[1] = { -1 };
+    int __wxStatusBarStyles_1[1] = { wxSB_NORMAL };
+    StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
+    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
+    SetStatusBar(StatusBar1);
+
+    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&projektFrame::OnButton1Click1);
+    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&projektFrame::OnQuit);
+    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&projektFrame::OnAbout);
+    //*)
+}
+
+projektFrame::~projektFrame()
+{
+    //(*Destroy(projektFrame)
+    //*)
+}
+
+void projektFrame::OnQuit(wxCommandEvent& event)
+{
+    Close();
+}
+
+void projektFrame::OnAbout(wxCommandEvent& event)
+{
+    wxString msg = wxbuildinfo(long_f);
+    wxMessageBox(msg, _("Welcome to..."));
+}
+
+void projektFrame::OnButton1Click1(wxCommandEvent& event)
+{
+
+wxString imie2;
+imie2=TextCtrl1->GetValue().mb_str(wxConvUTF8);
+strcpy(imie, imie2);
+mojagra();
+}
+
+void projektFrame::OnTextCtrl1Text(wxCommandEvent& event)
+{
+
+}
