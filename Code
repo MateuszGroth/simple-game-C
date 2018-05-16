@@ -1,16 +1,3 @@
-/***************************************************************
- * Name:      projektMain.cpp
- * Purpose:   Code for Application Frame
- * Author:    Mateusz (jhfxdghj)
- * Created:   2016-01-10
- * Copyright: Mateusz (hsxdfgs)
- * License:
- **************************************************************/
-
-#include "wx_pch.h"
-#include "projektMain.h"
-#include <wx/msgdlg.h>
-
 #include <graphics.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,9 +12,6 @@
 #define ESC 27
 #define N 5000
 #include <iostream>
-
-char imie[64]={0};
-
 void obiekt(int x, int y,int faza, int kolor1, int kolor2){
     int o;
     int obiekt[3][PIXEL*2]={
@@ -221,9 +205,8 @@ void rysuj(int x, int y, int faza, int color1, int color2){
     }
 
 
-int mojagra() {
+int main() {
 srand(time(NULL));
-    char napis[30]={0};
     unsigned char kod;
     int maxX, maxY;
     int x,y,xp,yp;
@@ -429,12 +412,12 @@ if(r<=0)
   dr=+1;
 r=r+dr;
 }
-if(licznik3>=2){
+if(licznik3>=3){
     yo++;
     yo1++;
     yo2++;
 }
-if(licznik3>=5){
+if(licznik3>=8){
     yo++;
     yo1++;
     yo2++;
@@ -486,136 +469,12 @@ if((yo>=(getmaxheight()/2-50)) || (x-70<=xo && (x+50)>=xo && (y-40)<=yo && (y+60
     licznik++;
 
 }
-if(licznik3>=11){
-    kod=ESC;
-}
+
 
 
 }while(kod!=112 && kod!=ESC);
     }while(kod!=ESC);
  }
- cleardevice();
- settextstyle(0,HORIZ_DIR,0);
- setcolor(WHITE);
- sprintf(napis, "twoj wynik to %d / 40", wynik);
- outtextxy(getmaxwidth()/4,(getmaxheight()/4)-50,imie);
- outtextxy(getmaxwidth()/4,getmaxheight()/4,napis);
-
  getch();
  closegraph();
  }
-
-
-
-//(*InternalHeaders(projektFrame)
-#include <wx/intl.h>
-#include <wx/string.h>
-//*)
-
-//helper functions
-enum wxbuildinfoformat {
-    short_f, long_f };
-
-wxString wxbuildinfo(wxbuildinfoformat format)
-{
-    wxString wxbuild(wxVERSION_STRING);
-
-    if (format == long_f )
-    {
-#if defined(__WXMSW__)
-        wxbuild << _T("-Windows");
-#elif defined(__UNIX__)
-        wxbuild << _T("-Linux");
-#endif
-
-#if wxUSE_UNICODE
-        wxbuild << _T("-Unicode build");
-#else
-        wxbuild << _T("-ANSI build");
-#endif // wxUSE_UNICODE
-    }
-
-    return wxbuild;
-}
-
-//(*IdInit(projektFrame)
-const long projektFrame::ID_STATICTEXT1 = wxNewId();
-const long projektFrame::ID_BUTTON1 = wxNewId();
-const long projektFrame::ID_TEXTCTRL1 = wxNewId();
-const long projektFrame::idMenuQuit = wxNewId();
-const long projektFrame::idMenuAbout = wxNewId();
-const long projektFrame::ID_STATUSBAR1 = wxNewId();
-//*)
-
-BEGIN_EVENT_TABLE(projektFrame,wxFrame)
-    //(*EventTable(projektFrame)
-    //*)
-END_EVENT_TABLE()
-
-projektFrame::projektFrame(wxWindow* parent,wxWindowID id)
-{
-    //(*Initialize(projektFrame)
-    wxMenuItem* MenuItem2;
-    wxMenuItem* MenuItem1;
-    wxMenu* Menu1;
-    wxMenuBar* MenuBar1;
-    wxMenu* Menu2;
-
-    Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
-    SetClientSize(wxSize(400,183));
-    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Wpisz nick"), wxPoint(168,32), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-    Button1 = new wxButton(this, ID_BUTTON1, _("Rozpocznij Grę"), wxPoint(152,96), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxPoint(152,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
-    MenuBar1 = new wxMenuBar();
-    Menu1 = new wxMenu();
-    MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
-    Menu1->Append(MenuItem1);
-    MenuBar1->Append(Menu1, _("&File"));
-    Menu2 = new wxMenu();
-    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
-    Menu2->Append(MenuItem2);
-    MenuBar1->Append(Menu2, _("Help"));
-    SetMenuBar(MenuBar1);
-    StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, 0, _T("ID_STATUSBAR1"));
-    int __wxStatusBarWidths_1[1] = { -1 };
-    int __wxStatusBarStyles_1[1] = { wxSB_NORMAL };
-    StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
-    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
-    SetStatusBar(StatusBar1);
-
-    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&projektFrame::OnButton1Click1);
-    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&projektFrame::OnQuit);
-    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&projektFrame::OnAbout);
-    //*)
-}
-
-projektFrame::~projektFrame()
-{
-    //(*Destroy(projektFrame)
-    //*)
-}
-
-void projektFrame::OnQuit(wxCommandEvent& event)
-{
-    Close();
-}
-
-void projektFrame::OnAbout(wxCommandEvent& event)
-{
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
-}
-
-void projektFrame::OnButton1Click1(wxCommandEvent& event)
-{
-
-wxString imie2;
-imie2=TextCtrl1->GetValue().mb_str(wxConvUTF8);
-strcpy(imie, imie2);
-mojagra();
-}
-
-void projektFrame::OnTextCtrl1Text(wxCommandEvent& event)
-{
-
-}
